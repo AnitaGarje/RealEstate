@@ -4,7 +4,7 @@
 <hibernate-mapping>
 		<class name="net.codejava.spring.model.Sector" table="Sector" catalog="AmanoraDurgaDb1">
 			<id name="id" type="java.lang.Integer">
-			<column name="id"/>
+			<column name="sid"/>
 			<generator class="identity"/> <!--  // when to use <generator class="identity"></generator> and <generator class="identity"/> -->
 			</id>
 			<property name="code" type="string"> 
@@ -17,6 +17,12 @@
 			<many-to-one name="project" class="net.codejava.spring.model.Project" lazy="false">
 			<column name="pid" not-null="false"></column>
 		</many-to-one>
+		<set name="towers" table="tower" lazy="false" fetch="select"> <!-- What is inverse="true" lazy="true" fetch="select" -->
+		            <key>
+		                <column name="sid" not-null="false" default="null"/><!-- This coln name is the name given to colm in sector table (not pk colm name of Project) -->
+		            </key>
+		            <one-to-many class="net.codejava.spring.model.Tower" />
+		        </set>
 		</class>
 </hibernate-mapping>
 

@@ -53,5 +53,10 @@
 	    <constructor-arg>
 	        <ref bean="sessionFactory" />
 	    </constructor-arg>
-	</bean>    	
+	</bean> 
+		<bean id="towerDao" class="net.codejava.spring.dao.TowerDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>   	
 </beans>

@@ -7,8 +7,8 @@ public class Sector implements java.io.Serializable{
 	private int id;
 	private String code;
 	private String description;
-	//private Set<Tower> towers = new HashSet<Tower>(0);
 	private Project project;
+	private Set<Tower> towers;
 	public Sector() //why?
 	{
 		
@@ -63,6 +63,14 @@ public class Sector implements java.io.Serializable{
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public Set<Tower> getTowers() {
+		return towers;
+	}
+
+	public void setTowers(Set<Tower> towers) {
+		this.towers = towers;
 	}
 
 	

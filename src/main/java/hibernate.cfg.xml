@@ -10,7 +10,8 @@
      <!-- Create DB tables -->
     <property name="hibernate.hbm2ddl.auto">update</property>
     
-    <mapping resource="net/codejava/spring/model/Project.hbm.xml"/>
+    	<mapping resource="net/codejava/spring/model/Project.hbm.xml"/>
      <mapping resource="net/codejava/spring/model/Sector.hbm.xml"/>
+     <mapping resource="net/codejava/spring/model/Tower.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
