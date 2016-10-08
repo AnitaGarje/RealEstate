@@ -31,30 +31,7 @@ public class ProjectController {
 	*/
 	 @Autowired
 	 private ProjectService projectService;
-	
 
-	/* @RequestMapping(value="/projects")
-	public ModelAndView home() {
-		List<Project> listProjects = projectService.list();
-		ModelAndView model = new ModelAndView("home");
-		model.addObject("projectList", listProjects);
-		return model;
-	}
-	
-	@RequestMapping(value = "/add")
-	 public ModelAndView addProject() {
-	  return new ModelAndView("addProject");
-	}
-	 
-	@RequestMapping(value = "/save", method = RequestMethod.GET)
-	 public ModelAndView saveProject(@ModelAttribute("project")Project project, 
-	    BindingResult result) {
-		projectService.addProject(project);
-		System.out.println("Project code:"+project.getCode()+"project description:"+project.getDescription());
-		
-	   return new ModelAndView("redirect:/");
-	  }*/
-	
 	
 	
 	@RequestMapping(value = "/projects", method = RequestMethod.GET)
@@ -65,7 +42,7 @@ public class ProjectController {
 	}
 	
 	//For add and update person both
-	@RequestMapping(value= "/project/add", method = RequestMethod.POST)
+	@RequestMapping(value= "/addProject", method = RequestMethod.POST)
 	public String addProject(@ModelAttribute("project") Project p){
 		
 		if(p.getId() == 0){
@@ -80,7 +57,7 @@ public class ProjectController {
 		
 	}
 	
-	 @RequestMapping("/edit/{id}")
+	 @RequestMapping("/editProject/{id}")
 	    public String editProject(@PathVariable("id") int id, Model model){
 	        model.addAttribute("project", projectService.getProjectById(id));
 	        model.addAttribute("projectList", projectService.list()); //projectList and jsp item shoudld be same in foreach
@@ -88,7 +65,7 @@ public class ProjectController {
 	    }
 	
 	
-		@RequestMapping("/remove/{id}")
+		@RequestMapping("/removeProject/{id}")
 	    public String removeProject(@PathVariable("id") int id){
 			projectService.removeProject(id);
 	        return "redirect:/projects";

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Anita Garje">
-	<title>Project</title>
+	<title>Sector</title>
 	
 	<!-- Bootstrap Core CSS -->
    <!--  <link href="css/bootstrap.min.css" rel="stylesheet">  -->
@@ -310,7 +310,7 @@
                             <a href="#"><i class="fa fa-cogs fa-fw" ></i> Masters<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Projects</a>
+                                    <a href="#">Sectors</a>
                                 </li>
                                 <li>
                                     <a href="#">Sectors</a>
@@ -376,7 +376,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Projects</h1>
+                    <h1 class="page-header">Sectors</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -385,15 +385,15 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Projects
+                            Sectors
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                <c:url var="addAction" value="/addProject" ></c:url>
-                                <form:form action="${addAction}" commandName="project">
-                                	<div>
-											<c:if test="${!empty project.code}">
+                                <c:url var="addAction" value="/addSector" ></c:url>
+                  				 <form:form action="${addAction}" method="POST" commandName="sector">
+									      <table>
+									      <c:if test="${!empty sector.code}">
 											<div class="form-group">
 													<form:label class="col-sm-2 control-label" path="id">
 														<spring:message text="ID"/>
@@ -404,38 +404,39 @@
 													</div>
 											</div>
 											</c:if>
-											<div class="form-group">
-													<form:label  class="col-sm-2 control-label" path="code">
-														<spring:message text="Code"/>
-													</form:label>
-												
-												<div class="col-sm-10" style="padding-bottom:5px;">
-													<form:input class="form-control" placeholder="001" path="code" />
-													</div>
-											</div>
-											<div class="form-group">
-												
-													<form:label class="col-sm-2 control-label" path="description">
-														<spring:message text="Description"/>
-													</form:label>
-												
-												<div class="col-sm-10">
-													<form:input class="form-control" placeholder="Amanora" path="description" />
-												</div>
-											</div>
-	
-													<c:if test="${!empty project.code}">
-														 <button type="submit" class="btn btn-default">Edit Button</button>
-													</c:if>
-													<c:if test="${empty project.code}">
-													<button type="submit" class="btn btn-default">Add Button</button>
-													</c:if>
-									
-										</div>
-										</form:form>
+									       
+									       <tr>
+									           <td><form:label path="code">Sector Code:</form:label></td>
+									           <td><form:input path="code" value="${sector.code}"/></td>
+									       </tr>
+									        <tr>
+									           <td><form:label path="description">Sector Description:</form:label></td>
+									           <td><form:input path="description" value="${sector.description}"/></td>
+									       </tr>
+									       <tr>
+									        <td>
+									         <form:label path="project.id">Project Type:</form:label>
+									        </td>
+									        <td>
+									         <form:select path="project.id" cssStyle="width: 150px;">    
+									       <option value="-1">Select a type</option>
+									       <c:forEach items="${projectList}" var="project">
+									        <option value="${project.id}">${project.description}</option>
+									       </c:forEach>
+									      </form:select>
+									     </td>
+									       </tr>
+									      
+									      
+									       <tr>
+									         <td>&nbsp;</td>
+									         <td><input type="submit" value="SAVE"/></td>
+									        </tr>
+									   </table> 
+									  </form:form>
                                 
                                 
-                                   <!--   <form class="form-horizontal" role="form" method="POST" action="/REALESTATE/project/add">
+                                   <!--   <form class="form-horizontal" role="form" method="POST" action="/REALESTATE/sector/add">
                                     
                                      	<div class="form-group">
                                             <label class="col-sm-2 control-label">Code</label>
@@ -469,30 +470,38 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                        <c:if test="${!empty sectorList}">
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
                                     	<!-- <th>id</th> -->
+                                    	<th>Project</th>
                                         <th>Code</th>
-                                        <th>Name</th>
+                                        <th>Tower</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 
-                                <c:forEach var="i" items="${projectList}" varStatus="status">
+                                <c:forEach var="sect" items="${sectorList}" varStatus="status">
 	        
                                     <tr class="odd gradeX">
-                                      <!--  <td>${project.id}</td>-->
-										<td>${i.code}</td>
-										<td>${i.description}</td>
-                    	                <td><a href="<c:url value='/editProject/${i.id}' />" ><i class="fa fa-pencil" aria-hidden="true" style="margin-left: 10px;"></i></a>
-                    	                 <a href="<c:url value='/removeProject/${i.id}'/>" ><i class="fa fa-trash" aria-hidden="true" style="margin-left: 10px;"></i></a></td>
+                                    
+                                   <!--   <td>Project</td>
+                                        <td>Code</td>
+                                        <td>Tower</td>
+                                        <td>Action</td>-->
+                                      		 <td>${sect.project.description}</td>
+										<td>${sect.code}</td>
+										<td>${sect.description}</td>
+                    	                <td><a href="<c:url value='/editSector/${sect.id}'/>" ><i class="fa fa-pencil" aria-hidden="true" style="margin-left: 10px;"></i></a>
+                    	                 <a href="<c:url value='/removeSector/${sect.id}'/>" ><i class="fa fa-trash" aria-hidden="true" style="margin-left: 10px;"></i></a></td>
                                     </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
+                            </c:if>
                 		</div>
                         <!-- /.panel-body -->
                     </div>

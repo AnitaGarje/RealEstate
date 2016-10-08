@@ -6,8 +6,8 @@ import java.util.List;
 
 
 
-import net.codejava.spring.dao.ProjectDAO;
-import net.codejava.spring.model.Project;
+import net.codejava.spring.dao.SectorDAO;
+import net.codejava.spring.model.Sector;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -17,43 +17,43 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
 
 
-@Service("projectService")
+@Service("sectorService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public class ProjectServiceImpl implements ProjectService{
+public class SectorServiceImpl implements SectorService{
 	
 	 @Autowired
-	 private ProjectDAO projectDao;
-
+	 private SectorDAO sectorDao;
+	 
 	 @Override
-	 public List<Project> list() {
-		  return projectDao.list();
+	 public List<Sector> list() {
+		  return sectorDao.list();
 		 }
 	 
 	 
 	// @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	 @Override
-	 public void addProject(Project project) {
-		 projectDao.addProject(project);
+	 public void addSector(Sector sector) {
+		 sectorDao.addSector(sector);
 	 }
 
 
 	@Override
 	@Transactional
-	public void updateProject(Project project) {
-		projectDao.updateProject(project);
+	public void updateSector(Sector sector) {
+		sectorDao.updateSector(sector);
 		
 	}
 	
 	@Override
 	@Transactional
-	public Project getProjectById(int id) {	
-		return this.projectDao.getProjectById(id);
+	public Sector getSectorById(int id) {	
+		return this.sectorDao.getSectorById(id);
 	}
 
 
 	@Override
 	@Transactional
-	public void removeProject(int id) {
-		this.projectDao.removeProject(id);
+	public void removeSector(int id) {
+		this.sectorDao.removeSector(id);
 	}
 }
